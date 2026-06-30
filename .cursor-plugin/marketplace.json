@@ -1,0 +1,13 @@
+{
+  "name": "lucid-mcp-server",
+  "owner": {
+    "name": "Lucid Software"
+  },
+  "plugins": [
+    {
+      "name": "lucid",
+      "source": "cursor",
+      "description": "Connect Cursor to the Lucid MCP for documents, diagrams, and boards."
+    }
+  ]
+}

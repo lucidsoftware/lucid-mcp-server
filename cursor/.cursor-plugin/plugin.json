@@ -1,0 +1,26 @@
+{
+  "name": "lucid",
+  "displayName": "Lucid",
+  "version": "1.0.0",
+  "description": "Connect Cursor to the Lucid MCP for working with Lucid documents, diagrams, boards, and resources.",
+  "author": {
+    "name": "Lucid Software"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "lucid",
+    "lucidchart",
+    "lucidspark",
+    "diagrams",
+    "mcp",
+    "visual-collaboration"
+  ],
+  "category": "productivity",
+  "tags": [
+    "diagrams",
+    "documents",
+    "boards",
+    "mcp"
+  ],
+  "skills": "./skills/"
+}

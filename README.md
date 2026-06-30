@@ -79,6 +79,14 @@ This is not an exhaustive list — the Lucid MCP server works with any MCP-compa
 
 ---
 
+## Cursor plugin
+
+For Cursor-specific skills, bundled MCP config, and install notes, see [cursor/README.md](cursor/README.md).
+
+Install with `/add-plugin lucid` after the plugin is published.
+
+---
+
 ## JSON config
 
 Some clients require you to edit a JSON config file directly.
