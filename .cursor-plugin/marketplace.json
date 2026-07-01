@@ -3,11 +3,14 @@
   "owner": {
     "name": "Lucid Software"
   },
+  "metadata": {
+    "description": "Lucid MCP server documentation and client integrations."
+  },
   "plugins": [
     {
       "name": "lucid",
       "source": "cursor",
-      "description": "Connect Cursor to the Lucid MCP for documents, diagrams, and boards."
+      "description": "Connect Cursor to the Lucid MCP for documents, diagrams, boards, and resources."
     }
   ]
 }
