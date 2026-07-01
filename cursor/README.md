@@ -118,9 +118,21 @@ Export this Lucidchart page as PNG.
 
 > AI tools you set up with the Lucid MCP server are Non-Lucid Applications (as defined in Lucid's [Terms of Service](https://lucid.co/tos)). Your use of these AI tools is subject to the agreement between you and the third-party provider.
 
+## Troubleshooting
+
+| Symptom | Likely cause | What to do |
+|:--------|:-------------|:-----------|
+| MCP shows disconnected or prompts for auth | OAuth not completed or expired | Reconnect in **Settings → Tools & MCP** and complete sign-in |
+| Connection blocked on Team/Enterprise | Admin has not enabled MCP | Ask an admin to enable MCP under **Admin → Security → Feature controls** |
+| Plugin enabled but Lucid tools are unavailable | MCP server not connected | Confirm `lucid` shows as connected in **Settings → Tools & MCP** |
+| FedRAMP account | MCP is not supported on FedRAMP | Use a non-FedRAMP Lucid account |
+| `/lucid` skill does not appear | Plugin not enabled | Enable Lucid under **Settings → Plugins** and reload Cursor if needed |
+| Tool calls fail after install | Stale auth or wrong account | Disconnect and reconnect OAuth; confirm you are signed into the intended Lucid account |
+
 ## Support & feedback
 
 - **Setup help:** [Lucid Help Center — MCP integration](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
+- **Plugin issues & feature requests:** [Open an issue](https://github.com/lucidsoftware/lucid-mcp-server/issues) in this repository
 - **General Lucid support:** [lucid.co/support](https://lucid.co/support)
 
 ## License

@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "Connect Cursor to the Lucid MCP for working with Lucid documents, diagrams, boards, and resources.",
   "author": {
-    "name": "Lucid Software"
+    "name": "Lucid Software",
+    "email": "support@lucid.co"
   },
   "homepage": "https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server",
   "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
@@ -18,14 +19,27 @@
     "diagrams",
     "documents",
     "boards",
+    "whiteboard",
     "mcp",
-    "visual-collaboration"
+    "visual-collaboration",
+    "collaboration",
+    "flowchart",
+    "org-chart",
+    "mind-map",
+    "sequence-diagram",
+    "erd",
+    "uml",
+    "plantuml",
+    "export",
+    "sharing",
+    "comments"
   ],
   "category": "productivity",
   "tags": [
     "diagrams",
     "documents",
     "boards",
+    "whiteboards",
     "mcp",
     "collaboration"
   ],
