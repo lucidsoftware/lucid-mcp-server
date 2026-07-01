@@ -47,6 +47,16 @@ Install from the Cursor plugin marketplace:
 
 Or enable the plugin in **Settings → Plugins**.
 
+## Local development (maintainers)
+
+If you are developing this plugin inside the `lucid-mcp-server` monorepo, Cursor cannot load the repo root directly — the plugin manifest lives in this `cursor/` subfolder. Create a local symlink and load it as `lucid-dev`:
+
+```bash
+ln -sfn /path/to/lucid-mcp-server/cursor ~/.cursor/plugins/local/lucid-dev
+```
+
+Then run `/add-plugin lucid-dev`. See **[LOCAL-TESTING.md](./LOCAL-TESTING.md)** for the full rationale, naming guide, and verification checklist.
+
 ## Skills
 
 | Skill | Description |
