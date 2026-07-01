@@ -33,6 +33,8 @@ lucid-mcp-server/                 ← marketplace repo root
 └── cursor/                         ← the actual Cursor plugin
     ├── .cursor-plugin/
     │   └── plugin.json             ← Cursor reads THIS file
+    ├── assets/
+    │   └── lucid-cg100bg-whitemark.png
     ├── mcp.json
     ├── skills/lucid/SKILL.md
     └── README.md
@@ -94,8 +96,7 @@ The symlink gives Cursor a local install path whose **root is the plugin directo
 
 ```
 ~/.cursor/plugins/local/
-├── lucid/                            ← full repo copy (for editing)
-└── lucid-dev → lucid/cursor/         ← local-only symlink (for loading)
+└── lucid-dev → /path/to/lucid-mcp-server/cursor   ← local-only symlink
 ```
 
 From Cursor's perspective:
@@ -103,11 +104,12 @@ From Cursor's perspective:
 ```
 plugins/local/lucid-dev/
 ├── .cursor-plugin/plugin.json        ✓ found at install root
+├── assets/
 ├── mcp.json
 └── skills/lucid/SKILL.md
 ```
 
-Edits made in the repo under `lucid/cursor/` are picked up immediately because `lucid-dev` points at the same files.
+Edits in your git clone under `cursor/` are picked up immediately because `lucid-dev` points at the same files. You do **not** need a separate copy of the repo under `plugins/local/lucid/`.
 
 ### Why the name `lucid-dev`?
 
@@ -139,34 +141,24 @@ Confusion usually comes from mixing up these layers:
 
 ## Setup (one-time per machine)
 
-### 1. Clone or copy the repo locally
-
-Either work directly in your git clone:
+### 1. Clone the repo
 
 ```bash
 git clone git@github.com:lucidsoftware/lucid-mcp-server.git
 cd lucid-mcp-server
 ```
 
-Or keep a working copy under Cursor's local plugins directory (common during active development):
-
-```bash
-cp -R /path/to/lucid-mcp-server ~/.cursor/plugins/local/lucid
-```
+Work in this clone (or any checkout path) — that is your source of truth for edits.
 
 ### 2. Create the symlink
 
 Point a local install name at the **`cursor/`** plugin directory — not the repo root:
 
 ```bash
-ln -sfn ~/.cursor/plugins/local/lucid/cursor ~/.cursor/plugins/local/lucid-dev
+ln -sfn /path/to/lucid-mcp-server/cursor ~/.cursor/plugins/local/lucid-dev
 ```
 
-If you prefer to symlink straight from your git clone (no extra copy):
-
-```bash
-ln -sfn ~/path/to/lucid-mcp-server/cursor ~/.cursor/plugins/local/lucid-dev
-```
+Replace `/path/to/lucid-mcp-server` with your actual clone path (for example `~/Cursor-submission/lucid-mcp-server`).
 
 ### 3. Enable the plugin in Cursor
 
@@ -192,6 +184,17 @@ Complete OAuth when Cursor prompts you. The bundled `mcp.json` points at product
 
 Local testing uses the **same endpoint** end users will use after marketplace install. There is no separate "dev MCP server" in this setup.
 
+### Alternative: copy the repo under `plugins/local/lucid/`
+
+If you cannot symlink to your git clone, you can copy the full repo and symlink from there:
+
+```bash
+cp -R /path/to/lucid-mcp-server ~/.cursor/plugins/local/lucid
+ln -sfn ~/.cursor/plugins/local/lucid/cursor ~/.cursor/plugins/local/lucid-dev
+```
+
+This works, but creates a second copy that can drift from your clone. Prefer symlinking directly from your git checkout.
+
 ---
 
 ## Verification checklist
@@ -206,9 +209,17 @@ Use this before opening a marketplace PR or tagging a release.
 | OAuth works | First tool call succeeds without `needsAuth` |
 | Skill available | Typing `/lucid` in chat offers the Lucid skill |
 | Edit loop | Change `cursor/skills/lucid/SKILL.md`, restart/reload if needed, confirm behavior updates |
-| Logs | `~/Library/Application Support/Cursor/logs/.../mcp-server-plugin-lucid-dev-lucid.log` shows `Successfully connected` |
+| Logs | MCP log file contains `Successfully connected` (see below) |
 
-Quick functional smoke test — ask the agent to list your Lucid root folder, or invoke the `lucid_list_folder_contents` MCP tool.
+**Log path (varies by OS):**
+
+| OS | Path |
+|:---|:-----|
+| macOS | `~/Library/Application Support/Cursor/logs/.../mcp-server-plugin-lucid-dev-lucid.log` |
+| Linux | `~/.config/Cursor/logs/.../mcp-server-plugin-lucid-dev-lucid.log` |
+| Windows | `%APPDATA%\Cursor\logs\...\mcp-server-plugin-lucid-dev-lucid.log` |
+
+Quick functional smoke test — ask the agent to search or list Lucid documents (for example, "show me my recent Lucid documents").
 
 ---
 
@@ -268,6 +279,10 @@ You can — but you must test from **`lucid/cursor/`**, not `lucid/` itself. The
 ### "Do I need both `lucid` and `lucid-dev` enabled?"
 
 No. Prefer **one** local install during development. Running both a marketplace `lucid` install and a local `lucid-dev` install can register duplicate MCP servers.
+
+### "I have a `plugins/local/lucid/` folder from an earlier setup — do I need it?"
+
+No. If you symlink `lucid-dev` directly to your git clone's `cursor/` directory, a separate copy under `plugins/local/lucid/` is unnecessary and will not load as a plugin anyway (Cursor finds `marketplace.json`, not `plugin.json`, at that level). Remove or disable it to avoid confusion.
 
 ### "Is `lucid-dev` a staging environment?"
 
