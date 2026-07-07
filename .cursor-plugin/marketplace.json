@@ -10,7 +10,7 @@
     {
       "name": "lucid",
       "source": "cursor",
-      "description": "Connect Cursor to the Lucid MCP for documents, diagrams, boards, and resources."
+      "description": "Ideate, diagram, and align teams by connecting Cursor to Lucid. Search, generate, and manage your technical architecture directly from the editor."
     }
   ]
 }

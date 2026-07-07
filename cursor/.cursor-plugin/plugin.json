@@ -2,7 +2,7 @@
   "name": "lucid",
   "displayName": "Lucid",
   "version": "1.0.0",
-  "description": "Connect Cursor to the Lucid MCP for working with Lucid documents, diagrams, boards, and resources.",
+  "description": "Ideate, diagram, and align teams by connecting Cursor to Lucid. Search, generate, and manage your technical architecture directly from the editor.",
   "author": {
     "name": "Lucid Software",
     "email": "support@lucid.co"
