@@ -2,7 +2,7 @@
   "name": "lucid",
   "displayName": "Lucid",
   "version": "1.0.0",
-  "description": "Ideate, diagram, and align teams by connecting Cursor to Lucid. Search, generate, and manage your technical architecture directly from the editor.",
+  "description": "Ideate, diagram, and align teams by connecting Cursor to the Lucid MCP server for searching, generating, and managing your technical architecture directly from the editor.",
   "author": {
     "name": "Lucid Software",
     "email": "support@lucid.co"
