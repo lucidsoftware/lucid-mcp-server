@@ -10,7 +10,7 @@ This plugin bundles the Lucid MCP server configuration and a unified agent skill
 |:--|:--|
 | **Endpoint** | `https://mcp.lucid.app/mcp` |
 | **Transport** | Streamable HTTP |
-| **Auth** | OAuth 2.0 with Dynamic Client Registration (DCR) |
+| **Auth** | OAuth 2.0 with Dynamic Client Registration (DCR) or CIMD |
 | **Plans** | Free, Individual, Team, and Enterprise. Not available on [FedRAMP](https://help.lucid.co/hc/en-us/articles/8780203563284) accounts. |
 
 Installing this plugin adds the Lucid MCP server via the bundled `mcp.json`. You can also connect manually in **Settings → Tools & MCP**:
@@ -112,7 +112,7 @@ Export this Lucidchart page as PNG.
 
 ## Authentication & data handling
 
-- Authentication uses **OAuth 2.0** with Dynamic Client Registration (DCR).
+- Authentication uses **OAuth 2.0** with Dynamic Client Registration (DCR) or CIMD.
 - The Lucid MCP server can access any Lucid document you have permission to access within your account. It cannot access documents owned by users outside your account.
 - The server acts as a **pass-through** — it does not retain document content, user prompts, or queries. Your credentials are never shared outside your Lucid account.
 
