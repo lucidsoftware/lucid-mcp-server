@@ -1,0 +1,16 @@
+{
+  "name": "lucid-mcp-server",
+  "owner": {
+    "name": "Lucid Software"
+  },
+  "metadata": {
+    "description": "Lucid MCP server documentation and client integrations."
+  },
+  "plugins": [
+    {
+      "name": "lucid",
+      "source": "cursor",
+      "description": "Ideate, diagram, and align teams by connecting Cursor to Lucid. Search, generate, and manage your technical architecture directly from the editor."
+    }
+  ]
+}

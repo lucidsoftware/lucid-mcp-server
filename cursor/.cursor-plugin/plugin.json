@@ -1,0 +1,48 @@
+{
+  "name": "lucid",
+  "displayName": "Lucid",
+  "version": "1.0.0",
+  "description": "Ideate, diagram, and align teams by connecting Cursor to Lucid. Search, generate, and manage your technical architecture directly from the editor.",
+  "author": {
+    "name": "Lucid Software",
+    "email": "support@lucid.co"
+  },
+  "homepage": "https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server",
+  "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
+  "license": "Apache-2.0",
+  "logo": "assets/lucid-cg100bg-whitemark.png",
+  "keywords": [
+    "lucid",
+    "lucidchart",
+    "lucidspark",
+    "lucidscale",
+    "diagrams",
+    "documents",
+    "boards",
+    "whiteboard",
+    "mcp",
+    "visual-collaboration",
+    "collaboration",
+    "flowchart",
+    "org-chart",
+    "mind-map",
+    "sequence-diagram",
+    "erd",
+    "uml",
+    "plantuml",
+    "export",
+    "sharing",
+    "comments"
+  ],
+  "category": "productivity",
+  "tags": [
+    "diagrams",
+    "documents",
+    "boards",
+    "whiteboards",
+    "mcp",
+    "collaboration"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json"
+}

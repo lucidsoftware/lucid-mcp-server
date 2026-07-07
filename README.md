@@ -70,12 +70,24 @@ For other clients, follow the MCP-setup docs for your tool of choice and use the
 | Claude Code | [Installing MCP servers](https://docs.claude.com/en/docs/claude-code/mcp#installing-mcp-servers) |
 | Microsoft Copilot Studio | [Add an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent) |
 | GitHub Copilot | [Extend Copilot Chat with MCP](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp) |
-| Cursor | [MCP context](https://cursor.com/docs/context/mcp) |
+| Cursor | [MCP context](https://cursor.com/docs/context/mcp); install via `/add-plugin lucid` — see [Cursor plugin](#cursor-plugin) below |
 | Windsurf | [Configuring your first MCP server](https://windsurf.com/university/tutorials/configuring-first-mcp-server) |
 
 This is not an exhaustive list — the Lucid MCP server works with any MCP-compatible client.
 
 > AI tools you set up with the Lucid MCP server are Non-Lucid Applications (as defined in our [Terms of Service](https://lucid.co/tos)). Your use of these AI tools is subject to the agreement between you and the third-party provider.
+
+---
+
+## Cursor plugin
+
+Install the Cursor plugin for bundled MCP config and a unified Lucid agent skill:
+
+```bash
+/add-plugin lucid
+```
+
+See [cursor/README.md](cursor/README.md) for Cursor-specific setup, skills, and example prompts.
 
 ---
 
