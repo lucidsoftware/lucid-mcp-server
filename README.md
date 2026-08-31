@@ -89,6 +89,16 @@ Install the Cursor plugin for bundled MCP config and a unified Lucid agent skill
 
 See [cursor/README.md](cursor/README.md) for Cursor-specific setup, skills, and example prompts.
 
+## Claude plugin
+
+Once published in Anthropic's public marketplace, install the Lucid plugin with bundled MCP configuration and workflow guidance:
+
+```bash
+/plugin install lucid@claude-plugins-official
+```
+
+See [claude/README.md](claude/README.md) for direct repository installation before marketplace acceptance, authentication, local development, and the plugin layout.
+
 ---
 
 ## JSON config
