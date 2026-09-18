@@ -1,0 +1,24 @@
+{
+  "name": "lucid-mcp-server",
+  "owner": {
+    "name": "Lucid Software",
+    "email": "support@lucid.co"
+  },
+  "description": "Create Lucidchart diagrams, find Lucid documents, and eliminate context switching Claude.",
+  "plugins": [
+    {
+      "name": "lucid",
+      "source": "./claude",
+      "description": "Connect Claude to Lucid through its official MCP server to search, create, edit, export, share, and comment on Lucid documents.",
+      "category": "productivity",
+      "tags": [
+        "diagrams",
+        "documents",
+        "boards",
+        "whiteboards",
+        "mcp",
+        "collaboration"
+      ]
+    }
+  ]
+}
