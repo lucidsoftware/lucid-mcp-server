@@ -1,6 +1,6 @@
 ---
 name: lucid
-description: "Use when working with Lucidchart, Lucidspark, or Lucidscale tasks: search/list documents, fetch or summarize content, create or edit diagrams, export, share, comment, or work with Lucid IDs/URLs through the Lucid MCP."
+description: "Use when working with Lucidchart or Lucidspark tasks: search/list documents, fetch or summarize content, create or edit diagrams, export, share, comment, or work with Lucid IDs/URLs through the Lucid MCP."
 ---
 
 # Lucid
