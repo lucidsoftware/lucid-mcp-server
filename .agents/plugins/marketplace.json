@@ -1,0 +1,20 @@
+{
+  "name": "lucidsoftware",
+  "interface": {
+    "displayName": "Lucid"
+  },
+  "plugins": [
+    {
+      "name": "lucid",
+      "source": {
+        "source": "local",
+        "path": "./lucid"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

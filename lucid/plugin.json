@@ -1,0 +1,71 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "lucid",
+  "version": "1.0.0",
+  "description": "Connect your agent to Lucid through its official MCP server to search, create, edit, export, share, and comment on Lucid documents.",
+  "author": {
+    "name": "Lucid Software",
+    "email": "support@lucid.co",
+    "url": "https://lucid.co"
+  },
+  "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
+  "license": "Apache-2.0",
+  "keywords": [
+    "lucid",
+    "lucidchart",
+    "lucidspark",
+    "lucidscale",
+    "diagrams",
+    "documents",
+    "boards",
+    "whiteboard",
+    "mcp",
+    "visual-collaboration",
+    "collaboration",
+    "flowchart",
+    "org-chart",
+    "mind-map",
+    "sequence-diagram",
+    "erd",
+    "uml",
+    "plantuml",
+    "export",
+    "sharing",
+    "comments"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "brandColor": "#282C33",
+        "capabilities": [
+          "MCP",
+          "Documents",
+          "Diagrams",
+          "Whiteboarding",
+          "Collaboration",
+          "Export"
+        ],
+        "category": "Productivity",
+        "composerIcon": "./assets/lucid-cg100bg-whitemark.png",
+        "defaultPrompt": [
+          "Get me up to speed on a document and provide a summary with key insights.",
+          "Turn this code into a diagram that explains how it works.",
+          "Update my diagram based on these notes."
+        ],
+        "developerName": "Lucid Software",
+        "displayName": "Lucid",
+        "logo": "./assets/lucid-cg100bg-whitemark.png",
+        "longDescription": "Simplify your workflow by using ChatGPT and Codex to generate Lucidchart diagrams directly from your conversations. Beyond seamless diagram creation, you can instantly search, retrieve, share, summarize, and edit your existing Lucid documents right within your chat. Whether you are starting a process map or extracting insights from complex boards, stop switching tools and give your prompts the visual context they need to accelerate your work.",
+        "privacyPolicyURL": "https://lucid.co/privacy",
+        "screenshots": [
+          "./assets/summarize-docs.png",
+          "./assets/generate-diagram.png",
+          "./assets/edit-diagram.png"
+        ],
+        "shortDescription": "Diagram & align in Lucidchart",
+        "termsOfServiceURL": "https://lucid.co/tos",
+        "websiteURL": "https://lucid.co/"
+      }
+    }
+  }
+}
