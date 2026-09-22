@@ -62,3 +62,11 @@ Only `plugin.json` belongs inside `.claude-plugin/`. Claude Code discovers skill
 - [Lucid MCP setup guide](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
 - [Repository issues](https://github.com/lucidsoftware/lucid-mcp-server/issues)
 - [Lucid support](https://lucid.co/support)
+
+## Legal
+
+Use of Lucid services is also governed by Lucid's legal terms:
+
+- [Terms of Service](https://lucid.co/tos)
+- [Privacy Policy](https://lucid.co/privacy)
+- [Supplemental AI Terms](https://lucid.co/supplemental-AI-terms)
