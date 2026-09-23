@@ -3,7 +3,7 @@
   "name": "lucid",
   "displayName": "Lucid",
   "version": "1.0.0",
-  "description": "Connect Claude to Lucid through its official MCP server to search, create, edit, export, share, and comment on Lucid documents.",
+  "description": "Create Lucidchart diagrams, find Lucid documents, and eliminate context switching.",
   "author": {
     "name": "Lucid Software",
     "email": "support@lucid.co",
