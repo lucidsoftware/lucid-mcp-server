@@ -1,0 +1,8 @@
+{
+  "source": "skills",
+  "targets": [
+    { "path": "claude/skills", "skills": ["lucid"] },
+    { "path": "lucid/skills", "skills": ["lucid"] },
+    { "path": "cursor/skills", "skills": ["lucid"] }
+  ]
+}
