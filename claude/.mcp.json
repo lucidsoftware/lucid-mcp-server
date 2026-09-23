@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "lucid-mcp": {
+    "lucid": {
       "type": "http",
       "url": "https://mcp.lucid.app/mcp"
     }
