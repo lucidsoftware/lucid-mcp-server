@@ -137,4 +137,4 @@ Export this Lucidchart page as PNG.
 
 ## License
 
-Apache License 2.0 © Lucid Software Inc.
+MIT License © Lucid Software Inc.
