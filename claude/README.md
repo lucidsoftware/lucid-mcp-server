@@ -10,7 +10,7 @@ For local testing or installation directly from this repository, add it as a plu
 
 ```text
 /plugin marketplace add lucidsoftware/lucid-mcp-server
-/plugin install lucid@lucid-mcp-server
+/plugin install lucid@lucid
 ```
 
 If Claude Code asks you to reload plugins, run `/reload-plugins`.
