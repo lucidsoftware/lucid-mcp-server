@@ -9,7 +9,7 @@
   },
   "homepage": "https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server",
   "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "logo": "assets/lucid-cg100bg-whitemark.png",
   "keywords": [
     "lucid",

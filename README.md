@@ -161,6 +161,17 @@ See [FAQ.md](FAQ.md) for answers to common questions about how the server works,
 
 ---
 
+## Trademark Notice
+The MIT License applies to the source code, software, and documentation in this repository.
+
+However, all trademarks, logos, brand names, and visual designs associated with Lucid Software Inc. (including the image assets in lucid/assets/) are the exclusive property of Lucid Software Inc.
+
+The MIT license does not grant you rights to use our trademarks, logos, or brand identity for your own projects, forks, or commercial distributions, except as necessary to describe the origin of the software under nominative fair use.
+
+---
+
 ## License
 
-[Apache License 2.0](LICENSE) © Lucid Software Inc.
+[MIT License](LICENSE) © Lucid Software Inc.
+
+
