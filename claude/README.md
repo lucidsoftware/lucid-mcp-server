@@ -57,6 +57,14 @@ claude/
 
 Only `plugin.json` belongs inside `.claude-plugin/`. Claude Code discovers skills and other plugin components relative to the plugin root.
 
+## Data sent to other services
+
+The bundled `lucid` skill uses the Lucid MCP connection. If a user asks it to submit feedback about Lucid MCP, it may call `lucid_submit_feedback`. That MCP tool sends the feedback title and text to Lucid's Airfocus feedback form. It also sends the Lucid user ID, account ID, and client user agent when available.
+
+This happens only when the feedback tool is called. The skill does not send ordinary document searches or document content to Airfocus.
+
+The Airfocus request is made by the MCP server tool, rather than by a direct network call in the skill.
+
 ## Support
 
 - [Lucid MCP setup guide](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
