@@ -6,13 +6,15 @@ Config file (default: skills-sync.json at repo root) shape:
     {
       "source": "skills",
       "targets": [
-        { "path": "claude/skills", "skills": ["lucid"] },
-        { "path": "cursor/skills", "skills": ["lucid"] }
+        { "path": "claude/skills", "skills": ["lucid"],
+          "manifest": "claude/.claude-plugin/plugin.json" },
+        { "path": "cursor/skills", "skills": ["lucid"],
+          "manifest": "cursor/.cursor-plugin/plugin.json" }
       ]
     }
 
 Usage:
-    python scripts/sync_skills.py sync [--dry-run] [--prune] [--target PATH] [--skill NAME] [-v]
+    python scripts/sync_skills.py sync [--dry-run] [--prune] [--bump-version] [--target PATH] [--skill NAME] [-v]
     python scripts/sync_skills.py check [--target PATH] [--skill NAME] [-v]
 """
 
@@ -21,6 +23,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
+import shutil
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -32,6 +36,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 class Target:
     path: Path
     skills: list[str]
+    manifest: Path | None = None
 
 
 @dataclass
@@ -49,6 +54,22 @@ class SkillDiff:
     @property
     def is_empty(self) -> bool:
         return not (self.add or self.modify or self.delete)
+
+
+@dataclass
+class PlannedSkill:
+    name: str
+    diff: SkillDiff
+
+
+@dataclass
+class TargetPlan:
+    target: Target
+    skills: list[PlannedSkill]
+    stale: list[str]
+    version_before: str | None = None
+    version_after: str | None = None
+    manifest_content: bytes | None = None
 
 
 class ConfigError(Exception):
@@ -71,7 +92,13 @@ def load_config(config_path: Path) -> Config:
     for entry in raw["targets"]:
         if "path" not in entry or "skills" not in entry:
             raise ConfigError(f"each target must define 'path' and 'skills': {entry}")
-        targets.append(Target(path=REPO_ROOT / entry["path"], skills=list(entry["skills"])))
+        targets.append(
+            Target(
+                path=REPO_ROOT / entry["path"],
+                skills=list(entry["skills"]),
+                manifest=REPO_ROOT / entry["manifest"] if entry.get("manifest") else None,
+            )
+        )
     return Config(source=source, targets=targets)
 
 
@@ -132,18 +159,42 @@ def find_stale_skill_dirs(target_path: Path, configured_skill_names: list[str]) 
     )
 
 
+def prepare_version_update(manifest: Path, level: str) -> tuple[str, str, bytes]:
+    try:
+        content = manifest.read_bytes().decode("utf-8")
+        data = json.loads(content)
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ConfigError(f"cannot read valid JSON manifest '{manifest}': {exc}") from exc
+
+    old = data.get("version") if isinstance(data, dict) else None
+    if not isinstance(old, str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", old):
+        raise ConfigError(f"manifest '{manifest}' needs a numeric MAJOR.MINOR.PATCH version")
+
+    matches = list(re.finditer(r'^[ \t]*"version"[ \t]*:[ \t]*"([^"\n]+)"', content, re.MULTILINE))
+    if len(matches) != 1 or matches[0].group(1) != old:
+        raise ConfigError(f"cannot safely update version field in '{manifest}'")
+
+    major, minor, patch = map(int, old.split("."))
+    new = f"{major}.{minor + 1}.0" if level == "minor" else f"{major}.{minor}.{patch + 1}"
+    match = matches[0]
+    updated = content[: match.start(1)] + new + content[match.end(1) :]
+    return old, new, updated.encode("utf-8")
+
+
 def run(
     config: Config,
     *,
     check: bool,
     dry_run: bool,
     prune: bool,
+    bump_version: bool,
     only_targets: list[str] | None,
     only_skills: list[str] | None,
     verbose: bool,
 ) -> int:
     drift_found = False
     error_found = False
+    plans: list[TargetPlan] = []
 
     for target in config.targets:
         target_rel = str(target.path.relative_to(REPO_ROOT))
@@ -151,6 +202,12 @@ def run(
             continue
 
         skill_names = [s for s in target.skills if not only_skills or s in only_skills]
+        plan = TargetPlan(target=target, skills=[], stale=[])
+        bump_level: str | None = None
+
+        if bump_version and target.manifest is None:
+            print(f"ERROR: target '{target_rel}' has no manifest in the config", file=sys.stderr)
+            error_found = True
 
         for skill_name in skill_names:
             source_dir = config.source / skill_name
@@ -165,15 +222,53 @@ def run(
                 error_found = True
                 continue
 
+            is_new_to_target = not _relative_files(dest_dir)
             diff = diff_skill(source_dir, dest_dir)
+            plan.skills.append(PlannedSkill(skill_name, diff))
+            if not diff.is_empty:
+                drift_found = True
+                if is_new_to_target:
+                    bump_level = "minor"
+                elif bump_level is None:
+                    bump_level = "patch"
+
+        # A --skill filter must not make other configured skills appear stale.
+        plan.stale = [
+            name
+            for name in find_stale_skill_dirs(target.path, target.skills)
+            if not only_skills or name in only_skills
+        ]
+        if plan.stale:
+            drift_found = True
+            if prune and bump_level is None:
+                bump_level = "patch"
+
+        if bump_version and target.manifest is not None:
+            try:
+                before, after, content = prepare_version_update(target.manifest, bump_level or "patch")
+                if bump_level:
+                    plan.version_before, plan.version_after, plan.manifest_content = before, after, content
+            except ConfigError as exc:
+                print(f"ERROR: {exc}", file=sys.stderr)
+                error_found = True
+
+        plans.append(plan)
+
+    if error_found:
+        return 2
+
+    for plan in plans:
+        target = plan.target
+        target_rel = str(target.path.relative_to(REPO_ROOT))
+        for skill in plan.skills:
+            diff = skill.diff
             if diff.is_empty:
                 if verbose:
-                    print(f"[ok] {target_rel}/{skill_name}")
+                    print(f"[ok] {target_rel}/{skill.name}")
                 continue
 
-            drift_found = True
             print(
-                f"[{'drift' if check or dry_run else 'sync'}] {target_rel}/{skill_name}: "
+                f"[{'drift' if check or dry_run else 'sync'}] {target_rel}/{skill.name}: "
                 f"+{len(diff.add)} ~{len(diff.modify)} -{len(diff.delete)}"
             )
             if verbose:
@@ -185,25 +280,31 @@ def run(
                     print(f"    delete: {rel}")
 
             if not check and not dry_run:
-                apply_diff(diff, source_dir, dest_dir, verbose)
+                apply_diff(diff, config.source / skill.name, target.path / skill.name, verbose)
 
-        stale = find_stale_skill_dirs(target.path, skill_names)
-        for stale_name in stale:
-            drift_found = True
-            stale_dir = target.path / stale_name
-            if prune and not check and not dry_run:
-                import shutil
-
-                shutil.rmtree(stale_dir)
-                print(f"[prune] removed stale skill '{stale_name}' from {target_rel}")
+        for stale_name in plan.stale:
+            if prune and not check:
+                if dry_run:
+                    print(f"[prune] would remove stale skill '{stale_name}' from {target_rel}")
+                else:
+                    shutil.rmtree(target.path / stale_name)
+                    print(f"[prune] removed stale skill '{stale_name}' from {target_rel}")
             else:
                 print(
                     f"WARNING: stale skill folder '{stale_name}' in {target_rel} is not "
                     f"in its configured skills list. Re-run with --prune to remove it."
                 )
 
-    if error_found:
-        return 2
+        if plan.version_after is not None:
+            assert target.manifest is not None and plan.manifest_content is not None
+            print(
+                f"[version] {target.manifest.relative_to(REPO_ROOT)}: "
+                f"{plan.version_before} -> {plan.version_after}"
+                + (" (dry run)" if dry_run else "")
+            )
+            if not dry_run:
+                target.manifest.write_bytes(plan.manifest_content)
+
     if check and drift_found:
         return 1
     return 0
@@ -215,10 +316,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, default=REPO_ROOT / "skills-sync.json")
     parser.add_argument("--dry-run", action="store_true", help="print planned actions without writing (sync mode only)")
     parser.add_argument("--prune", action="store_true", help="delete stale skill folders no longer in a target's config")
+    parser.add_argument("--bump-version", action="store_true", help="bump versions of plugins whose skills change (sync mode only)")
     parser.add_argument("--target", action="append", dest="targets", help="restrict to this target path (repeatable)")
     parser.add_argument("--skill", action="append", dest="skills", help="restrict to this skill name (repeatable)")
     parser.add_argument("-v", "--verbose", action="store_true")
     args = parser.parse_args(argv)
+
+    if args.mode == "check" and args.bump_version:
+        parser.error("--bump-version is only valid with sync")
 
     try:
         config = load_config(args.config)
@@ -231,6 +336,7 @@ def main(argv: list[str] | None = None) -> int:
         check=args.mode == "check",
         dry_run=args.dry_run,
         prune=args.prune,
+        bump_version=args.bump_version,
         only_targets=args.targets,
         only_skills=args.skills,
         verbose=args.verbose,
