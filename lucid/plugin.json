@@ -9,7 +9,7 @@
     "url": "https://lucid.co"
   },
   "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "lucid",
     "lucidchart",
