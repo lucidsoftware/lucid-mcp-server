@@ -1,8 +1,8 @@
-# Lucid MCP Server
+# Lucid MCP Server and Tools
 
 Connect your AI tools to Lucid to intelligently search for files, create visuals, and share with your team.
 
-The Lucid Model Context Protocol (MCP) server is a cloud-hosted bridge between your Lucid documents and AI tools such as ChatGPT, Claude, Microsoft Copilot, and Cursor. Once connected, you can use natural language to search, retrieve, edit, summarize, and create Lucid documents from inside your AI client.
+The Lucid Model Context Protocol (MCP) server is a cloud-hosted bridge between your Lucid documents and AI tools such as ChatGPT, Claude, Microsoft Copilot, and Cursor. Once connected, you can use natural language to search, retrieve, edit, summarize, and create Lucid documents from inside your AI client. Use of the Lucid MCP server is subject to the negotiated services agreement between the parties or Lucid's standard Terms of Service available at lucid.co/tos.
 
 - **Endpoint:** `https://mcp.lucid.app/mcp`
 - **Transport:** Streamable HTTP
@@ -79,6 +79,18 @@ This is not an exhaustive list — the Lucid MCP server works with any MCP-compa
 
 ---
 
+## Skills
+
+### Skills
+
+Skills are pre-built instructions that give AI clients (Claude, ChatGPT, Cursor, etc.) domain expertise for common Lucid workflows with the Lucid MCP Server. The full skill library lives in this repo's /skills folder. Download any .SKILL.md file and drop it into your MCP client's skills folder (e.g. .claude/skills/) to use it manually.
+
+### Agent Skills
+
+Agent skills are skills that are directly built into the AI client plugins.You can describe what you want in plain language, and if a matching skill exists it's automatically invoked, or run one directly with a / command.
+
+---
+
 ## Cursor plugin
 
 Install the Cursor plugin for bundled MCP config and a unified Lucid agent skill:
@@ -125,7 +137,7 @@ Some clients require you to edit a JSON config file directly.
 
 ---
 
-## For admins: enable or disable the MCP server
+## For admins: enable or disable the Lucid MCP server
 
 Admins on **Team** and **Enterprise** accounts can control whether users can connect to the Lucid MCP server.
 
@@ -135,7 +147,7 @@ Admins on **Team** and **Enterprise** accounts can control whether users can con
 4. Under **MCP access**, use the toggle next to **Allow users to connect**.
 5. Confirm with **Enable MCP** or **Disable MCP** in the modal.
 
-Granting access allows users to connect from any AI client. To restrict access to specific AI tools, you'll need to disable the MCP server at the account level.
+Granting access allows users to connect from any AI client. To restrict access to specific AI tools, you'll need to disable the Lucid MCP server at the account level.
 
 ---
 
@@ -149,29 +161,28 @@ Granting access allows users to connect from any AI client. To restrict access t
 
 ## FAQ
 
-See [FAQ.md](FAQ.md) for answers to common questions about how the server works, what it can access, how data is handled, the diagram types it can create, and how it differs from standard text-to-AI connections.
+See our [Help Center](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server#faq) for answers to common questions about the Lucid MCP server.
 
 ---
 
-## Support & feedback
+## Support & Feedback
 
-- **Setup help:** [Lucid Help Center article](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
-- **Issues & feature requests:** [Open an issue](../../issues) in this repository
+- **Setup help for the Lucid MCP Server:** [Lucid Help Center article](https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server)
 - **General Lucid support:** [lucid.co/support](https://lucid.co/support)
 
 ---
 
 ## Trademark Notice
-The MIT License applies to the source code, software, and documentation in this repository.
+The MIT License applies to the contents of this repository.
 
-However, all trademarks, logos, brand names, and visual designs associated with Lucid Software Inc. (including the image assets in lucid/assets/) are the exclusive property of Lucid Software Inc.
+However, all trademarks, logos and brand names associated with Lucid Software Inc. are the exclusive property of Lucid Software Inc.
 
-The MIT license does not grant you rights to use our trademarks, logos, or brand identity for your own projects, forks, or commercial distributions, except as necessary to describe the origin of the software under nominative fair use.
+The MIT license does not grant you rights to use our trademarks, logos, or brand identity for your own projects, forks, or commercial distributions, except as necessary to identify the origin of the software under nominative fair use.
 
 ---
 
-## License
+## License for Lucid MCP Tools
 
-[MIT License](LICENSE) © Lucid Software Inc.
+The contents of this repository are provided subject to the [MIT License](LICENSE)
 
 
