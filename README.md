@@ -1,4 +1,4 @@
-# Lucid MCP Server
+# Lucid MCP Server and Tools
 
 Connect your AI tools to Lucid to intelligently search for files, create visuals, and share with your team.
 
@@ -76,6 +76,18 @@ For other clients, follow the MCP-setup docs for your tool of choice and use the
 This is not an exhaustive list — the Lucid MCP server works with any MCP-compatible client.
 
 > AI tools you set up with the Lucid MCP server are Non-Lucid Applications (as defined in our [Terms of Service](https://lucid.co/tos)). Your use of these AI tools is subject to the agreement between you and the third-party provider.
+
+---
+
+## Skills
+
+### Skills
+
+Skills are pre-built instructions that give AI clients (Claude, ChatGPT, Cursor, etc.) domain expertise for common Lucid workflows with the Lucid MCP Server. The full skill library lives in this repo's /skills folder. Download any .SKILL.md file and drop it into your MCP client's skills folder (e.g. .claude/skills/) to use it manually.
+
+### Agent Skills
+
+Agent skills are skills that are directly built into the AI client plugins.You can describe what you want in plain language, and if a matching skill exists it's automatically invoked, or run one directly with a / command.
 
 ---
 
@@ -161,11 +173,11 @@ See our [Help Center](https://help.lucid.co/hc/en-us/articles/42578801807508-Int
 ---
 
 ## Trademark Notice
-The MIT License applies to the source code, software, and documentation in this repository.
+The MIT License applies to the contents of this repository.
 
-However, all trademarks, logos, brand names, and visual designs associated with Lucid Software Inc. (including the image assets in lucid/assets/) are the exclusive property of Lucid Software Inc.
+However, all trademarks, logos and brand names associated with Lucid Software Inc. are the exclusive property of Lucid Software Inc.
 
-The MIT license does not grant you rights to use our trademarks, logos, or brand identity for your own projects, forks, or commercial distributions, except as necessary to describe the origin of the software under nominative fair use.
+The MIT license does not grant you rights to use our trademarks, logos, or brand identity for your own projects, forks, or commercial distributions, except as necessary to identify the origin of the software under nominative fair use.
 
 ---
 
