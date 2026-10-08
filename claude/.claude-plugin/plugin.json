@@ -12,6 +12,7 @@
   "homepage": "https://help.lucid.co/hc/en-us/articles/42578801807508-Integrate-Lucid-with-AI-tools-using-the-Lucid-MCP-server",
   "repository": "https://github.com/lucidsoftware/lucid-mcp-server",
   "license": "MIT",
+  "privacyPolicyUrl": "https://lucid.co/privacy",
   "keywords": [
     "lucid",
     "lucidchart",
@@ -34,5 +35,6 @@
     "sharing",
     "comments"
   ],
+  "icon": "./assets/lucid-cg100bg-whitemark.png",
   "skills": "./skills/"
 }
