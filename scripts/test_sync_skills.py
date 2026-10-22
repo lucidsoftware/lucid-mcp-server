@@ -2,6 +2,7 @@
 
 import contextlib
 import io
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -148,6 +149,53 @@ class SkillSyncVersionTests(unittest.TestCase):
             with self.assertRaises(SystemExit) as error:
                 sync_skills.main(["check", "--bump-version"])
         self.assertEqual(error.exception.code, 2)
+
+    def test_dummy_skill_is_discovered_configured_and_synced(self):
+        self.write("skills/lucid/SKILL.md", "existing")
+        self.write("skills/dummy-skill/SKILL.md", "dummy")
+        targets = [self.target(name) for name in ("claude", "lucid", "cursor")]
+        config_path = self.write(
+            "skills-sync.json",
+            json.dumps(
+                {
+                    "source": "skills",
+                    "targets": [
+                        {
+                            "path": f"{name}/skills",
+                            "skills": ["lucid"],
+                            "manifest": f"{name}/plugin.json",
+                        }
+                        for name in ("claude", "lucid", "cursor")
+                    ],
+                }
+            ),
+        )
+        before = config_path.read_text()
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(sync_skills.main(["check", "--config", str(config_path)]), 1)
+            self.assertEqual(sync_skills.main(["sync", "--dry-run", "--bump-version"]), 0)
+        self.assertEqual(config_path.read_text(), before)
+        self.assertFalse((self.root / "claude/skills/dummy-skill").exists())
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(sync_skills.main(["sync", "--bump-version"]), 0)
+            self.assertEqual(sync_skills.main(["check"]), 0)
+        config = json.loads(config_path.read_text())
+        for entry, target in zip(config["targets"], targets):
+            self.assertEqual(entry["skills"], ["lucid", "dummy-skill"])
+            self.assertEqual((target.path / "dummy-skill/SKILL.md").read_text(), "dummy")
+            self.assertIn('"version": "1.3.0"', target.manifest.read_text())
+
+    def test_custom_config_does_not_discover_dummy_skill(self):
+        self.write("skills/dummy-skill/SKILL.md", "dummy")
+        config_path = self.write(
+            "custom.json",
+            '{"source": "skills", "targets": [{"path": "plugin/skills", "skills": []}]}',
+        )
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(sync_skills.main(["sync", "--config", str(config_path)]), 0)
+        self.assertFalse((self.root / "plugin/skills/dummy-skill").exists())
 
 
 if __name__ == "__main__":

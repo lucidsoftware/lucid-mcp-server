@@ -102,6 +102,27 @@ def load_config(config_path: Path) -> Config:
     return Config(source=source, targets=targets)
 
 
+def discover_new_skills(config: Config, only_skills: list[str] | None) -> list[str]:
+    if not config.source.is_dir():
+        return []
+    configured = {name for target in config.targets for name in target.skills}
+    return sorted(
+        path.name
+        for path in config.source.iterdir()
+        if path.is_dir()
+        and (path / "SKILL.md").is_file()
+        and path.name not in configured
+        and (not only_skills or path.name in only_skills)
+    )
+
+
+def updated_config_content(config_path: Path, new_skills: list[str]) -> str:
+    raw = json.loads(config_path.read_text())
+    for target in raw["targets"]:
+        target["skills"].extend(new_skills)
+    return json.dumps(raw, indent=2) + "\n"
+
+
 def _file_hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -191,10 +212,18 @@ def run(
     only_targets: list[str] | None,
     only_skills: list[str] | None,
     verbose: bool,
+    config_path: Path | None = None,
 ) -> int:
     drift_found = False
     error_found = False
     plans: list[TargetPlan] = []
+    new_skills = discover_new_skills(config, only_skills) if config_path else []
+    config_content: str | None = None
+    if new_skills:
+        config_content = updated_config_content(config_path, new_skills)
+        for target in config.targets:
+            target.skills.extend(new_skills)
+        drift_found = True
 
     for target in config.targets:
         target_rel = str(target.path.relative_to(REPO_ROOT))
@@ -256,6 +285,13 @@ def run(
 
     if error_found:
         return 2
+
+    if new_skills:
+        action = "drift" if check or dry_run else "sync"
+        print(f"[{action}] {config_path.relative_to(REPO_ROOT)}: add skills {', '.join(new_skills)}")
+        if not check and not dry_run:
+            assert config_content is not None
+            config_path.write_text(config_content)
 
     for plan in plans:
         target = plan.target
@@ -325,8 +361,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.mode == "check" and args.bump_version:
         parser.error("--bump-version is only valid with sync")
 
+    config_path = args.config.resolve()
     try:
-        config = load_config(args.config)
+        config = load_config(config_path)
     except ConfigError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
@@ -340,6 +377,11 @@ def main(argv: list[str] | None = None) -> int:
         only_targets=args.targets,
         only_skills=args.skills,
         verbose=args.verbose,
+        config_path=(
+            config_path
+            if config_path == (REPO_ROOT / "skills-sync.json").resolve()
+            else None
+        ),
     )
 
 
