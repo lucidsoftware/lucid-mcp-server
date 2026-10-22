@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lucid",
   "displayName": "Lucid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create Lucidchart diagrams, find Lucid documents, and eliminate context switching.",
   "author": {
     "name": "Lucid Software",
