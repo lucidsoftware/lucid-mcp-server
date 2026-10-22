@@ -24,7 +24,7 @@ With `--bump-version`, the script increases the **patch** version of every plugi
 
 ## Add a new skill
 
-Create a directory such as `skills/new-skill/` with a `SKILL.md`, then add `"new-skill"` to the `skills` list for each intended target in `skills-sync.json`. For example, to distribute it to Claude and Cursor, add it to the entries for `claude/skills` and `cursor/skills`.
+Create a directory such as `skills/new-skill/` with a `SKILL.md`. When using the default `skills-sync.json`, the sync script detects skills absent from every target list, adds them to all three targets in the config, and copies them. `check` and `sync --dry-run` report the pending config update without writing it. If a skill should go to only some plugins, add it manually to those target lists before syncing. A custom `--config` remains explicit and is not updated automatically.
 
 ```bash
 python3 scripts/sync_skills.py sync --dry-run --bump-version --skill new-skill -v
