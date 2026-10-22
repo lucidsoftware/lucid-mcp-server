@@ -1,8 +1,8 @@
 {
   "source": "skills",
   "targets": [
-    { "path": "claude/skills", "skills": ["lucid"], "manifest": "claude/.claude-plugin/plugin.json" },
-    { "path": "lucid/skills", "skills": ["lucid"], "manifest": "lucid/plugin.json" },
-    { "path": "cursor/skills", "skills": ["lucid"], "manifest": "cursor/.cursor-plugin/plugin.json" }
+    { "path": "claude/skills", "skills": ["lucid", "lucid-diagram-enterprise-architecture"], "manifest": "claude/.claude-plugin/plugin.json" },
+    { "path": "lucid/skills", "skills": ["lucid", "lucid-diagram-enterprise-architecture"], "manifest": "lucid/plugin.json" },
+    { "path": "cursor/skills", "skills": ["lucid", "lucid-diagram-enterprise-architecture"], "manifest": "cursor/.cursor-plugin/plugin.json" }
   ]
 }
