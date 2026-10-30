@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "lucid",
-  "version": "1.1.0",
-  "description": "Connect your agent to Lucid through its official MCP server to search, create, edit, export, share, and comment on Lucid documents.",
+  "version": "2.0.0",
+  "description": "Create Lucidchart diagrams, find Lucid documents, and eliminate context switching.",
   "author": {
     "name": "Lucid Software",
     "email": "support@lucid.co",
@@ -55,7 +55,7 @@
         "developerName": "Lucid Software",
         "displayName": "Lucid",
         "logo": "./assets/lucid-cg100bg-whitemark.png",
-        "longDescription": "Simplify your workflow by using ChatGPT and Codex to generate Lucidchart diagrams directly from your conversations. Beyond seamless diagram creation, you can instantly search, retrieve, share, summarize, and edit your existing Lucid documents right within your chat. Whether you are starting a process map or extracting insights from complex boards, stop switching tools and give your prompts the visual context they need to accelerate your work.",
+        "longDescription": "Simplify your workflow by connecting ChatGPT or Codex to Lucid to generate new Lucidchart diagrams from conversations. Instantly create flowcharts, sequence diagrams, process maps, customer journey maps, and more. You can also search, edit, share, and summarize existing Lucid documents within ChatGPT & Codex. Give ChatGPT & Codex the foundational visual context needed to create code and plan projects without switching tools.",
         "privacyPolicyURL": "https://lucid.co/privacy",
         "screenshots": [
           "./assets/summarize-docs.png",
@@ -63,6 +63,7 @@
           "./assets/edit-diagram.png"
         ],
         "shortDescription": "Diagram & align in Lucidchart",
+        "supportURL": "https://lucid.co/contact-us",
         "termsOfServiceURL": "https://lucid.co/tos",
         "websiteURL": "https://lucid.co/"
       }
