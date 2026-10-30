@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "lucid",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Connect your agent to Lucid through its official MCP server to search, create, edit, export, share, and comment on Lucid documents.",
   "author": {
     "name": "Lucid Software",

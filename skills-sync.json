@@ -6,7 +6,11 @@
       "skills": [
         "lucid",
         "lucid-diagram-enterprise-architecture",
-        "visualizations"
+        "visualizations",
+        "entity-relationship-diagram",
+        "lucid-diagram-bpmn",
+        "lucid-diagram-cloud-architecture",
+        "lucid-diagram-code"
       ],
       "manifest": "claude/.claude-plugin/plugin.json"
     },
@@ -15,7 +19,11 @@
       "skills": [
         "lucid",
         "lucid-diagram-enterprise-architecture",
-        "visualizations"
+        "visualizations",
+        "entity-relationship-diagram",
+        "lucid-diagram-bpmn",
+        "lucid-diagram-cloud-architecture",
+        "lucid-diagram-code"
       ],
       "manifest": "lucid/plugin.json"
     },
@@ -24,7 +32,11 @@
       "skills": [
         "lucid",
         "lucid-diagram-enterprise-architecture",
-        "visualizations"
+        "visualizations",
+        "entity-relationship-diagram",
+        "lucid-diagram-bpmn",
+        "lucid-diagram-cloud-architecture",
+        "lucid-diagram-code"
       ],
       "manifest": "cursor/.cursor-plugin/plugin.json"
     }
