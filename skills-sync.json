@@ -7,7 +7,7 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "entity-relationship-diagram",
+        "lucid-diagram-entity-relationship",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
         "lucid-diagram-code"
@@ -20,7 +20,7 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "entity-relationship-diagram",
+        "lucid-diagram-entity-relationship",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
         "lucid-diagram-code"
@@ -33,7 +33,7 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "entity-relationship-diagram",
+        "lucid-diagram-entity-relationship",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
         "lucid-diagram-code"
