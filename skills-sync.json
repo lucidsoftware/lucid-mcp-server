@@ -7,10 +7,11 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "lucid-diagram-entity-relationship",
+        "lucid-entity-relationship-diagram",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
-        "lucid-diagram-code"
+        "lucid-diagram-code",
+        "lucid-create-flowchart"
       ],
       "manifest": "claude/.claude-plugin/plugin.json"
     },
@@ -20,10 +21,11 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "lucid-diagram-entity-relationship",
+        "lucid-entity-relationship-diagram",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
-        "lucid-diagram-code"
+        "lucid-diagram-code",
+        "lucid-create-flowchart"
       ],
       "manifest": "lucid/plugin.json"
     },
@@ -33,10 +35,11 @@
         "lucid",
         "lucid-diagram-enterprise-architecture",
         "visualizations",
-        "lucid-diagram-entity-relationship",
+        "lucid-entity-relationship-diagram",
         "lucid-diagram-bpmn",
         "lucid-diagram-cloud-architecture",
-        "lucid-diagram-code"
+        "lucid-diagram-code",
+        "lucid-create-flowchart"
       ],
       "manifest": "cursor/.cursor-plugin/plugin.json"
     }
