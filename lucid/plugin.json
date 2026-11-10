@@ -57,11 +57,6 @@
         "logo": "./assets/lucid-cg100bg-whitemark.png",
         "longDescription": "Simplify your workflow by connecting ChatGPT or Codex to Lucid to generate new Lucidchart diagrams from conversations. Instantly create flowcharts, sequence diagrams, process maps, customer journey maps, and more. You can also search, edit, share, and summarize existing Lucid documents within ChatGPT & Codex. Give ChatGPT & Codex the foundational visual context needed to create code and plan projects without switching tools.",
         "privacyPolicyURL": "https://lucid.co/privacy",
-        "screenshots": [
-          "./assets/summarize-docs.png",
-          "./assets/generate-diagram.png",
-          "./assets/edit-diagram.png"
-        ],
         "shortDescription": "Diagram & align in Lucidchart",
         "supportURL": "https://lucid.co/contact-us",
         "termsOfServiceURL": "https://lucid.co/tos",
