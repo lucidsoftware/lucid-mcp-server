@@ -1,6 +1,6 @@
 # Contributing skills
 
-Run the commands below from the repository root. Edit skills in `skills/`, which is the source for the plugin copies. The mappings in `skills-sync.json` decide which skills are copied to `claude/skills`, `lucid/skills`, and `cursor/skills`. Do not edit those copies directly.
+Run the commands below from the repository root. Edit skills in `skills/`, which is the source for the plugin copies. The mappings in `skills-sync.json` decide which skills are copied to `claude/skills`, `lucid/skills`, and `cursor/skills`. Do not edit those copies directly. `awesome-copilot/` is derived from `lucid/` afterward; see the last section.
 
 ## Update an existing skill
 
@@ -45,3 +45,16 @@ python3 scripts/sync_skills.py check --target cursor/skills
 ```
 
 If you intentionally remove a skill from a target's configuration, `sync` warns about its leftover directory. Review the removal, then run `python3 scripts/sync_skills.py sync --prune --bump-version` to delete stale skill directories and bump the affected plugin's patch version. The flag bumps each affected plugin once per sync, even if several skills change; a new skill takes precedence over existing skill edits. It does not bump versions when nothing changes, and it cannot recover a bump for files already synced without the flag. Run `python3 scripts/sync_skills.py check` after syncing and include the updated source skill, copied skills, configuration (if changed), and affected plugin manifests in your change.
+
+## Awesome-copilot plugin (`awesome-copilot/`)
+
+`awesome-copilot/` is generated from `lucid/` for submission to awesome-copilot, which allows at most 10 keywords per plugin. Do not edit it directly. It is a full copy of `lucid/` whose `plugin.json` keeps only the **first 10** `keywords`, so list the most important tags first in `lucid/plugin.json`. Each kept keyword must be lowercase letters, numbers, and hyphens, at most 30 characters.
+
+After changing anything in `lucid/` (including after `sync_skills.py` updates `lucid/skills`), regenerate and commit the result:
+
+```bash
+python3 scripts/sync_awesome_copilot_plugin.py sync
+python3 scripts/sync_awesome_copilot_plugin.py check
+```
+
+The `Check plugin sync` GitHub workflow runs `check` on every branch and pull request and fails if `awesome-copilot/` is stale. To submit, set **Plugin path inside the repository** to `awesome-copilot` and give a release tag or full commit SHA that contains the up-to-date `awesome-copilot/` directory (awesome-copilot rejects branches).
