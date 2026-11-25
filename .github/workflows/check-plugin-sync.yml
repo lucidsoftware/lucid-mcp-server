@@ -1,0 +1,17 @@
+name: Check plugin sync
+# Runs on every branch push and on pull requests, so drift is caught before merge.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skill copies match skills/
+        run: python3 scripts/sync_skills.py check
+      - name: awesome-copilot/ matches lucid/
+        run: python3 scripts/sync_awesome_copilot_plugin.py check
+      - name: Sync script tests
+        run: python3 -m unittest scripts.test_sync_skills scripts.test_sync_awesome_copilot_plugin
